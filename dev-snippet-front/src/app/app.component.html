@@ -1,0 +1,159 @@
+<div class="min-h-screen bg-gray-50 p-8">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-bold text-gray-900 mb-2">Angular Material + Tailwind Theme Test</h1>
+      <p class="text-gray-600">Testing custom theme configuration</p>
+    </div>
+
+    <!-- Material Components Test -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Buttons Card -->
+      <mat-card class="shadow-lg">
+        <mat-card-header>
+          <mat-card-title>Buttons</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="space-y-4 pt-4">
+          <div class="flex flex-wrap gap-2">
+            <button mat-raised-button color="primary">Primary</button>
+            <button mat-raised-button color="accent">Accent</button>
+            <button mat-raised-button color="warn">Warn</button>
+            <button mat-raised-button>Default</button>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button mat-flat-button color="primary">Flat Primary</button>
+            <button mat-stroked-button color="accent">Stroked Accent</button>
+            <button mat-icon-button color="warn">
+              <mat-icon>favorite</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Form Fields Card -->
+      <mat-card class="shadow-lg">
+        <mat-card-header>
+          <mat-card-title>Form Fields</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="space-y-4 pt-4">
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Outline Input</mat-label>
+            <input matInput placeholder="Enter text">
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field class="w-full" appearance="fill">
+            <mat-label>Fill Input</mat-label>
+            <input matInput placeholder="Enter text">
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Chips Card -->
+      <mat-card class="shadow-lg">
+        <mat-card-header>
+          <mat-card-title>Chips</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="pt-4">
+          <mat-chip-set>
+            <mat-chip>Default Chip</mat-chip>
+            <mat-chip highlighted color="primary">Primary</mat-chip>
+            <mat-chip highlighted color="accent">Accent</mat-chip>
+            <mat-chip highlighted color="warn">Warn</mat-chip>
+          </mat-chip-set>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Progress & Sliders Card -->
+      <mat-card class="shadow-lg">
+        <mat-card-header>
+          <mat-card-title>Progress & Sliders</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="space-y-6 pt-4">
+          <div>
+            <p class="text-sm text-gray-600 mb-2">Progress Bar</p>
+            <mat-progress-bar mode="determinate" value="65" color="primary"></mat-progress-bar>
+          </div>
+          <div>
+            <p class="text-sm text-gray-600 mb-2">Slider</p>
+            <mat-slider min="0" max="100" step="1" class="w-full">
+              <input matSliderThumb value="50">
+            </mat-slider>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Checkboxes & Radio Card -->
+      <mat-card class="shadow-lg">
+        <mat-card-header>
+          <mat-card-title>Selections</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="space-y-4 pt-4">
+          <div>
+            <p class="text-sm text-gray-600 mb-2">Checkboxes</p>
+            <div class="flex flex-col space-y-2">
+              <mat-checkbox color="primary">Primary Checkbox</mat-checkbox>
+              <mat-checkbox color="accent">Accent Checkbox</mat-checkbox>
+              <mat-checkbox color="warn">Warn Checkbox</mat-checkbox>
+            </div>
+          </div>
+          <div>
+            <p class="text-sm text-gray-600 mb-2">Radio Buttons</p>
+            <mat-radio-group color="primary">
+              <mat-radio-button value="1" class="mr-4">Option 1</mat-radio-button>
+              <mat-radio-button value="2">Option 2</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Toggle & Badge Card -->
+      <mat-card class="shadow-lg">
+        <mat-card-header>
+          <mat-card-title>Toggles & Badges</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="space-y-4 pt-4">
+          <div>
+            <p class="text-sm text-gray-600 mb-2">Slide Toggles</p>
+            <div class="flex flex-col space-y-2">
+              <mat-slide-toggle color="primary">Primary Toggle</mat-slide-toggle>
+              <mat-slide-toggle color="accent">Accent Toggle</mat-slide-toggle>
+            </div>
+          </div>
+          <div>
+            <p class="text-sm text-gray-600 mb-2">Badges</p>
+            <div class="flex gap-4">
+              <button mat-raised-button matBadge="4" matBadgeColor="primary">Primary</button>
+              <button mat-raised-button matBadge="8" matBadgeColor="accent">Accent</button>
+              <button mat-raised-button matBadge="!" matBadgeColor="warn">Warn</button>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+    <!-- Tailwind Test Section -->
+    <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Tailwind CSS Test</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-blue-500 text-white p-4 rounded-lg text-center">
+          <p class="font-semibold">Blue</p>
+        </div>
+        <div class="bg-green-500 text-white p-4 rounded-lg text-center">
+          <p class="font-semibold">Green</p>
+        </div>
+        <div class="bg-purple-500 text-white p-4 rounded-lg text-center">
+          <p class="font-semibold">Purple</p>
+        </div>
+        <div class="bg-red-500 text-white p-4 rounded-lg text-center">
+          <p class="font-semibold">Red</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<router-outlet />

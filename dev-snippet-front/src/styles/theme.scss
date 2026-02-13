@@ -1,0 +1,273 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$devsnippet-primary-palette: (
+  50: #fff3ed,
+  100: #ffe0d1,
+  200: #ffccb3,
+  300: #ffb694,
+  400: #ffa67d,
+  500: #FF6B35,  // Main primary color
+  600: #f7632f,
+  700: #ed5827,
+  800: #e34e20,
+  900: #d53c12,
+  A100: #ffffff,
+  A200: #ffd7cf,
+  A400: #ffab9c,
+  A700: #ff9482,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: white,
+  )
+);
+
+$devsnippet-accent-palette: (
+  50: #fef9e6,
+  100: #fdf0c0,
+  200: #fbe796,
+  300: #f9dd6c,
+  400: #f8d54d,
+  500: #F7B801,  // Main accent color
+  600: #f6b301,
+  700: #f5ac01,
+  800: #f4a501,
+  900: #f29800,
+  A100: #ffffff,
+  A200: #fff8eb,
+  A400: #ffe4b8,
+  A700: #ffdba0,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: rgba(black, 0.87),
+    700: rgba(black, 0.87),
+    800: rgba(black, 0.87),
+    900: rgba(black, 0.87),
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
+  )
+);
+
+$devsnippet-warn-palette: (
+  50: #ffebee,
+  100: #ffcdd2,
+  200: #ef9a9a,
+  300: #e57373,
+  400: #ef5350,
+  500: #f44336,
+  600: #e53935,
+  700: #d32f2f,
+  800: #c62828,
+  900: #b71c1c,
+  A100: #ff8a80,
+  A200: #ff5252,
+  A400: #ff1744,
+  A700: #d50000,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$devsnippet-primary: mat.m2-define-palette($devsnippet-primary-palette, 500);
+$devsnippet-accent: mat.m2-define-palette($devsnippet-accent-palette, 500);
+$devsnippet-warn: mat.m2-define-palette($devsnippet-warn-palette, 500);
+
+$devsnippet-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $devsnippet-primary,
+    accent: $devsnippet-accent,
+    warn: $devsnippet-warn,
+  ),
+  typography: mat.m2-define-typography-config(
+    $font-family: 'Outfit, sans-serif',
+    $headline-1: mat.m2-define-typography-level(3.5rem, 1.2, 800),
+    $headline-2: mat.m2-define-typography-level(2.2rem, 1.3, 700),
+    $headline-3: mat.m2-define-typography-level(1.8rem, 1.4, 600),
+    $headline-4: mat.m2-define-typography-level(1.5rem, 1.4, 600),
+    $headline-5: mat.m2-define-typography-level(1.25rem, 1.5, 500),
+    $headline-6: mat.m2-define-typography-level(1.1rem, 1.5, 500),
+    $body-1: mat.m2-define-typography-level(1rem, 1.6, 400),
+    $body-2: mat.m2-define-typography-level(0.95rem, 1.6, 400),
+  ),
+  density: 0,
+));
+
+@include mat.all-component-themes($devsnippet-theme);
+
+.mat-app-background,
+.mat-drawer-container {
+  background-color: #0A0E27 !important;
+}
+
+.mat-mdc-card {
+  background-color: #131829 !important;
+  border: 1px solid #1F2937 !important;
+}
+
+.mat-mdc-dialog-container {
+  background-color: #131829 !important;
+}
+
+.mat-toolbar {
+  background-color: #0A0E27 !important;
+  border-bottom: 1px solid #1F2937;
+}
+
+.mat-drawer {
+  background-color: #05070F !important;
+  border-right: 1px solid #1F2937;
+}
+
+.mat-mdc-form-field {
+  .mat-mdc-text-field-wrapper {
+    background-color: #131829 !important;
+  }
+
+  .mat-mdc-form-field-focus-overlay {
+    background-color: rgba(255, 107, 53, 0.1);
+  }
+}
+
+.mat-mdc-input-element {
+  color: #F9FAFB !important;
+
+  &::placeholder {
+    color: #6B7280 !important;
+  }
+}
+
+.mat-mdc-raised-button.mat-primary {
+  background: linear-gradient(135deg, #FF6B35, #E85A28) !important;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+
+  &:hover {
+    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.4);
+  }
+}
+
+.mat-mdc-chip {
+  background-color: #05070F !important;
+  border: 1px solid #1F2937 !important;
+  color: #9CA3AF !important;
+
+  &.mat-mdc-chip-selected {
+    background-color: rgba(255, 107, 53, 0.2) !important;
+    border-color: #FF6B35 !important;
+    color: #FF6B35 !important;
+  }
+}
+
+.mat-mdc-table {
+  background-color: #131829 !important;
+}
+
+.mat-mdc-header-row {
+  background-color: #0A0E27 !important;
+}
+
+.mat-mdc-row:hover {
+  background-color: #1A2035 !important;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1F2937 #0A0E27;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0A0E27;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #1F2937;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #374151;
+  }
+}
+
+.mat-mdc-menu-panel {
+  background-color: #131829 !important;
+  border: 1px solid #1F2937;
+}
+
+.mat-mdc-menu-item {
+  color: #F9FAFB !important;
+
+  &:hover {
+    background-color: #1A2035 !important;
+  }
+}
+
+.mat-mdc-option {
+  background-color: #131829 !important;
+  color: #F9FAFB !important;
+
+  &:hover,
+  &.mat-mdc-option-active {
+    background-color: #1A2035 !important;
+  }
+
+  &.mat-mdc-option-selected {
+    background-color: rgba(255, 107, 53, 0.2) !important;
+  }
+}
+
+.mat-mdc-tab-group {
+  background-color: #131829;
+}
+
+.mat-mdc-tab {
+  color: #9CA3AF !important;
+
+  &.mat-mdc-tab-active {
+    color: #FF6B35 !important;
+  }
+}
+
+.mat-mdc-tab-header {
+  border-bottom: 1px solid #1F2937;
+}
+
+.mat-ripple-element {
+  background-color: rgba(255, 107, 53, 0.1) !important;
+}
