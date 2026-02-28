@@ -1,6 +1,10 @@
 import { Hono } from 'hono'
 import { z } from 'zod'
 import { zValidator } from '@hono/zod-validator'
+import { db } from '../db/index.js'
+import { users } from '../db/schema.js'
+import { eq } from 'drizzle-orm'
+import bcrypt from 'bcryptjs'
 
 const auth = new Hono()
 
@@ -18,7 +22,24 @@ const loginSchema = z.object({
 auth.post('/register', zValidator('json', registerSchema), async (c) => {
   const { email, password, username } = c.req.valid('json')
 
-  // TODO: hash password, save to DB
+  const existingUser = await db
+    .select()
+    .from(users)
+    .where(eq(users.email, email))
+    .limit(1)
+
+  if (existingUser.length > 0) {
+    return c.json({ message: 'User already exists' }, 400)
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10)
+
+  await db.insert(users).values({
+    email,
+    username,
+    password: hashedPassword
+  })
+
   return c.json({ message: 'User registered', email, username })
 })
 
