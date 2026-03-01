@@ -1,0 +1,23 @@
+<nav class="fixed top-0 left-0 right-0 z-50 border-b border-border backdrop-blur-md bg-bg-dark/80">
+  <div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+
+    <div routerLink="/" class="flex items-center gap-2 cursor-pointer">
+      <span class="flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent font-mono font-bold text-white text-sm -rotate-6">
+        &lt;/&gt;
+      </span>
+      <span class="font-bold text-3xl">Dev<span class="text-primary">Snippet</span></span>
+    </div>
+
+    <div class="flex gap-6">
+      <a routerLink="/" routerLinkActive="active" class="nav-link">Features</a>
+      <a routerLink="/" class="nav-link">Explore</a>
+      <a routerLink="/" class="nav-link">Pricing</a>
+      <a routerLink="/" class="nav-link">Docs</a>
+    </div>
+
+    <div class="flex gap-3 items-center">
+      <button mat-button routerLink="/auth">Sign in</button>
+      <button mat-flat-button color="primary" routerLink="/auth">Get Started</button>
+    </div>
+  </div>
+</nav>
