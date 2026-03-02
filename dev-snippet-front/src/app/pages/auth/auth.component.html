@@ -1,1 +1,84 @@
-<p>auth works!</p>
+<div class="min-h-screen flex flex-row">
+  <div class="flex-1 flex flex-col justify-between p-14">
+    <app-logo></app-logo>
+
+    <div>
+      <h1 class="text-5xl font-extrabold leading-tight tracking-tight mb-4">
+        Your code,<br>
+        <span class="text-gradient"> always at hand.</span>
+      </h1>
+      <p class="text-text-secondary text-2xl leading-relaxed">
+        Store, search and share code snippets with syntax highlighting, tagging and team collections.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <div class="flex items-center gap-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent-green shadow-[0_0_8px_#06D6A0]"></span>
+        <span class="text-text-secondary text-xl">30+ languages with syntax highlighting</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent-green shadow-[0_0_8px_#06D6A0]"></span>
+        <span class="text-text-secondary text-xl">Smart search across all your snippets</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent-green shadow-[0_0_8px_#06D6A0]"></span>
+        <span class="text-text-secondary text-xl">Share collections with your team</span>
+      </div>
+    </div>
+
+    <div class="text-text-muted text-xs">© 2025 DevSnippet. All rights reserved.</div>
+  </div>
+  <div class="flex-1 flex items-center justify-center p-14 bg-bg-card">
+    <div class="w-full max-w-md">
+      <h2 class="text-3xl font-bold tracking-tight mb-2">
+        {{ mode === 'login' ? 'Welcome back' : 'Create account' }}
+      </h2>
+
+      <p class="text-text-secondary text-xl mb-8">
+        {{ mode === 'login' ? "Don't have an account?" : 'Already have an account?' }}
+        <span (click)="toggleMode()" class="text-primary font-semibold cursor-pointer">
+          {{ mode === 'login' ? 'Sign up free →' : 'Sign in →' }}
+        </span>
+      </p>
+
+      <div class="flex flex-col">
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" placeholder="you@example.com"/>
+        </mat-form-field>
+
+        <mat-form-field class="w-full" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="••••••••"/>
+        </mat-form-field>
+
+        @if (mode === 'register') {
+          <mat-form-field class="w-full" appearance="outline">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" placeholder="••••••••"/>
+          </mat-form-field>
+        }
+
+        <button mat-flat-button color="primary" class="w-full !h-12 !rounded-lg mt-1">
+          {{ mode === 'login' ? 'Sign in' : 'Create account' }}
+        </button>
+      </div>
+
+      <div class="flex items-center gap-4 my-6">
+        <div class="flex-1 h-px bg-border"></div>
+        <span class="text-text-muted text-sm">or continue with</span>
+        <div class="flex-1 h-px bg-border"></div>
+      </div>
+
+      <div class="flex gap-3">
+        <button mat-stroked-button class="flex-1 !rounded-lg !border-border !text-text-secondary">
+          GitHub
+        </button>
+        <button mat-stroked-button class="flex-1 !rounded-lg !border-border !text-text-secondary">
+          Google
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
