@@ -13,7 +13,7 @@ export class AuthService {
 
   register(registerRequest: RegisterRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(
-      `${API_URL}/auth/register`,
+      `${this.url}/auth/register`,
       registerRequest
     );
   }

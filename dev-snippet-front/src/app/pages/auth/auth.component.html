@@ -42,28 +42,49 @@
         </span>
       </p>
 
-      <div class="flex flex-col">
-        <mat-form-field class="w-full" appearance="outline">
+      <form [formGroup]="form" class="flex flex-col gap-4">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Email</mat-label>
-          <input matInput type="email" placeholder="you@example.com"/>
+          <input formControlName="email" matInput placeholder="you@example.com" type="email"/>
+          <mat-error>
+            @if (form.hasError('required', 'email')) {
+              Email is required
+            } @else if (form.hasError('email', 'email')) {
+              Invalid email address
+            }
+          </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="w-full" appearance="outline">
+        <mat-form-field appearance="outline" class="w-full">
           <mat-label>Password</mat-label>
-          <input matInput type="password" placeholder="••••••••"/>
+          <input formControlName="password" matInput placeholder="••••••••" type="password"/>
+          <mat-error>
+            @if (form.hasError('required', 'password')) {
+              Password is required
+            } @else if (form.hasError('minlength', 'password')) {
+              Password must be at least 6 characters
+            }
+          </mat-error>
         </mat-form-field>
 
         @if (mode === 'register') {
           <mat-form-field class="w-full" appearance="outline">
             <mat-label>Confirm Password</mat-label>
-            <input matInput type="password" placeholder="••••••••"/>
+            <input formControlName="confirmPassword" matInput type="password" placeholder="••••••••"/>
+            <mat-error>
+              @if (form.hasError('required', 'confirmPassword')) {
+                Please confirm you password
+              } @else if (form.hasError('passwordMismatch')) {
+                Passwords do not match
+              }
+            </mat-error>
           </mat-form-field>
         }
 
-        <button mat-flat-button color="primary" class="w-full !h-12 !rounded-lg mt-1">
+        <button (click)="onSubmit()" class="w-full !h-12 !rounded-lg mt-1" color="primary" mat-flat-button [disabled]="form.invalid">
           {{ mode === 'login' ? 'Sign in' : 'Create account' }}
         </button>
-      </div>
+      </form>
 
       <div class="flex items-center gap-4 my-6">
         <div class="flex-1 h-px bg-border"></div>
@@ -72,10 +93,10 @@
       </div>
 
       <div class="flex gap-3">
-        <button mat-stroked-button class="flex-1 !rounded-lg !border-border !text-text-secondary">
+        <button class="flex-1 !rounded-lg !border-border !text-text-secondary" mat-stroked-button>
           GitHub
         </button>
-        <button mat-stroked-button class="flex-1 !rounded-lg !border-border !text-text-secondary">
+        <button class="flex-1 !rounded-lg !border-border !text-text-secondary" mat-stroked-button>
           Google
         </button>
       </div>

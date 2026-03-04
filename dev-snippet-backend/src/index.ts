@@ -2,12 +2,18 @@ import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import auth from './routes/auth.js';
 import { runMigrations } from './db/migrate.js';
+import { cors } from 'hono/cors';
 
 const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!');
-});
+app.use(
+  '*',
+  cors({
+    origin: 'http://localhost:4200',
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization']
+  })
+);
 
 app.route('/auth', auth);
 
