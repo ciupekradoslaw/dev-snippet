@@ -5,7 +5,7 @@ import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { register } from '../../store/auth';
+import { login, register } from '../../store/auth';
 import { passwordMatchValidator } from '../../shared/validators/password-match.validator';
 
 export type AuthMode = 'login' | 'register';
@@ -62,8 +62,9 @@ export class AuthComponent {
     if (!email || !password) return;
 
     if (this.mode === 'register') {
-      console.log('asdasd');
       this.store.dispatch(register({ email, password }));
+    } else {
+      this.store.dispatch(login({ email, password }));
     }
   }
 }

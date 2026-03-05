@@ -8,18 +8,20 @@ import bcrypt from 'bcryptjs';
 
 const auth = new Hono();
 
+const emailSchema = z.string().regex(/^[^\s@]+@[^\s@]+$/);
+
 const registerSchema = z.object({
-  email: z.email(),
+  email: emailSchema,
   password: z.string().min(6)
 });
 
 const loginSchema = z.object({
-  email: z.email(),
+  email: emailSchema,
   password: z.string().min(6)
 });
 
-auth.post('/register', zValidator('json', registerSchema), async (c) => {
-  const { email, password } = c.req.valid('json');
+auth.post('/register', zValidator('json', registerSchema), async (context) => {
+  const { email, password } = context.req.valid('json');
 
   const existingUser = await db
     .select()
@@ -28,7 +30,7 @@ auth.post('/register', zValidator('json', registerSchema), async (c) => {
     .limit(1);
 
   if (existingUser.length > 0) {
-    return c.json({ success: false, error: 'User already exists' }, 400);
+    return context.json({ success: false, error: 'User already exists' }, 400);
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -38,14 +40,32 @@ auth.post('/register', zValidator('json', registerSchema), async (c) => {
     password: hashedPassword
   });
 
-  return c.json({ success: true, data: { email } }, 201);
+  return context.json({ success: true, data: { email } }, 201);
 });
 
 auth.post('/login', zValidator('json', loginSchema), async (context) => {
   const { email, password } = context.req.valid('json');
 
-  // TODO: verify password, generate JWT
-  return context.json({ message: 'Login successful', email });
+  const existingUser = await db
+    .select()
+    .from(users)
+    .where(eq(users.email, email))
+    .limit(1);
+
+  if (existingUser.length === 0) {
+    return context.json({ success: false, error: 'Invalid credentials' }, 400);
+  }
+
+  const isPasswordValid = await bcrypt.compare(
+    password,
+    existingUser[0].password
+  );
+
+  if (!isPasswordValid) {
+    return context.json({ success: false, error: 'Invalid credentials' }, 400);
+  }
+
+  return context.json({ success: true, data: { email } }, 200);
 });
 
 export default auth;
