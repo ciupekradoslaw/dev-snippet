@@ -3,6 +3,7 @@ import { Hono } from 'hono';
 import auth from './routes/auth.js';
 import { runMigrations } from './db/migrate.js';
 import { cors } from 'hono/cors';
+import { authMiddleware } from './middlewares/auth.middleware.js';
 
 const app = new Hono();
 
@@ -16,6 +17,7 @@ app.use(
 );
 
 app.route('/auth', auth);
+app.use('*', authMiddleware);
 
 async function bootstrap() {
   try {

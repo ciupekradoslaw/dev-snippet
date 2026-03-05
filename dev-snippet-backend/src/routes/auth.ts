@@ -5,6 +5,8 @@ import { db } from '../db/index.js';
 import { users } from '../db/schema.js';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
+import { sign, verify } from 'hono/jwt';
+import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 
 const auth = new Hono();
 
@@ -65,7 +67,47 @@ auth.post('/login', zValidator('json', loginSchema), async (context) => {
     return context.json({ success: false, error: 'Invalid credentials' }, 400);
   }
 
+  const token = await sign(
+    {
+      sub: existingUser[0].id,
+      email,
+      exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24
+    },
+    process.env.JWT_SECRET!
+  );
+
+  setCookie(context, 'token', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'Lax',
+    maxAge: 60 * 60 * 24,
+    path: '/'
+  });
+
   return context.json({ success: true, data: { email } }, 200);
+});
+
+auth.post('/logout', (context) => {
+  deleteCookie(context, 'token', { path: '/' });
+  return context.json({ success: true });
+});
+
+auth.get('/me', async (context) => {
+  const token = getCookie(context, 'token');
+
+  if (!token) {
+    return context.json({ success: false, error: 'Unauthorized' }, 401);
+  }
+
+  try {
+    const payload = await verify(token, process.env.JWT_SECRET!, 'HS256');
+    return context.json({ success: true, data: { email: payload['email'] } });
+  } catch {
+    return context.json(
+      { success: false, error: 'Invalid or expired token' },
+      401
+    );
+  }
 });
 
 export default auth;
