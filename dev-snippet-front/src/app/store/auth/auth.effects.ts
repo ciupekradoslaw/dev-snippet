@@ -4,11 +4,13 @@ import { AuthService } from '../../core/services/auth.service';
 import * as AuthActions from './auth.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { AuthSuccess } from '../../core/models/auth.model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
   private actions$ = inject(Actions);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   register$ = createEffect(() =>
     this.actions$.pipe(
@@ -47,6 +49,8 @@ export class AuthEffects {
           .pipe(
             map((response) => {
               if (response.success) {
+                localStorage.setItem('token', response.data.token);
+                this.router.navigate(['/']);
                 return AuthActions.loginSuccess(response as AuthSuccess);
               }
               return AuthActions.loginFailure({ error: response.error });

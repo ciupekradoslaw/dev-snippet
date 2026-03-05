@@ -33,3 +33,12 @@ export const loginFailure = createAction(
   '[Auth] Login Failure',
   props<{ error: string }>()
 );
+
+export const logout = createAction('[Auth] Logout');
+
+export const checkAuth = createAction('[Auth] Check Auth');
+export const checkAuthSuccess = createAction(
+  '[Auth] Check Auth Success',
+  props<{ email: string }>()
+);
+export const checkAuthFailure = createAction('[Auth] Check Auth Failure');

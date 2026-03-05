@@ -25,4 +25,12 @@ export class AuthService {
   login(loginRequest: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.url}/auth/login`, loginRequest);
   }
+
+  logout(): void {
+    localStorage.removeItem('token');
+  }
+
+  me(): Observable<AuthResponse> {
+    return this.http.get<AuthResponse>(`${this.url}/auth/me`);
+  }
 }

@@ -9,7 +9,8 @@ export interface AuthSuccess {
   success: true;
   data: {
     email: string;
-  }
+    token: string;
+  };
 }
 
 export interface AuthError {

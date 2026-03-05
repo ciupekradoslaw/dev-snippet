@@ -6,7 +6,6 @@ import { users } from '../db/schema.js';
 import { eq } from 'drizzle-orm';
 import bcrypt from 'bcryptjs';
 import { sign, verify } from 'hono/jwt';
-import { deleteCookie, getCookie, setCookie } from 'hono/cookie';
 
 const auth = new Hono();
 
@@ -76,24 +75,11 @@ auth.post('/login', zValidator('json', loginSchema), async (context) => {
     process.env.JWT_SECRET!
   );
 
-  setCookie(context, 'token', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'Lax',
-    maxAge: 60 * 60 * 24,
-    path: '/'
-  });
-
-  return context.json({ success: true, data: { email } }, 200);
-});
-
-auth.post('/logout', (context) => {
-  deleteCookie(context, 'token', { path: '/' });
-  return context.json({ success: true });
+  return context.json({ success: true, data: { email, token } }, 200);
 });
 
 auth.get('/me', async (context) => {
-  const token = getCookie(context, 'token');
+  const token = context.req.header('Authorization')?.split(' ')[1];
 
   if (!token) {
     return context.json({ success: false, error: 'Unauthorized' }, 401);

@@ -1,9 +1,8 @@
 import { createMiddleware } from 'hono/factory';
-import { getCookie } from 'hono/cookie';
 import { verify } from 'hono/jwt';
 
 export const authMiddleware = createMiddleware(async (context, next) => {
-  const token = getCookie(context, 'token');
+  const token = context.req.header('Authorization')?.split(' ')[1];
 
   if (!token) {
     return context.json({ success: false, error: 'Unauthorized' }, 401);
