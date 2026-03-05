@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthService } from '../../core/services/auth.service';
 import * as AuthActions from './auth.actions';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { AuthSuccess } from '../../core/models/auth.model';
 import { Router } from '@angular/router';
 
@@ -65,5 +65,17 @@ export class AuthEffects {
           )
       )
     )
+  );
+
+  logout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.logout),
+        tap(() => {
+          this.authService.logout();
+          this.router.navigate(['/auth']);
+        })
+      ),
+    { dispatch: false }
   );
 }
